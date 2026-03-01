@@ -57,3 +57,9 @@ Make sure that the Related products section (Section for the best sellers) on th
 - Cross browser testing: i.e. Accessability across different web browsers (Chrome, Safari, Firefox, etc.).
 
 ### Out of scope
+- Process of the payment and checkout flow
+- Account management of the seller's account
+- Recommendation algorithm of the eBay
+- Performance testing for the backend API (this is a separate concern)
+- Auditing done for the accessibility (a dedicated separate pass)
+
