@@ -10,38 +10,37 @@ Before creating the test cases, followings should be communicated with the relev
 
 1. What's the definition for the "Same price range"? i.e. Is it less than ±5%, at ±5%, at ±10%, at ±20%, at ±50% of the product shown?
 2. What's the criteria to qualify for the "related products"? Is it Most sales? Highest rated? or Most relevant?
-3. Is the products for related products are same from eBay? So we can use the same eBay APIs? or from something else?
-4. What proves the seller is a "best seller". I there something from the eBay API we can extract this from? Or is there something like a badge there?
-5. Should this be from the same seller or different sellers? -Though this probably from different sellers due to how the selling nature of the sellers
-6. Should related products contains out-of-stock products as well? -I've seen some sites has out-of-stock as well. But some don't due to they use it to show what's the next options for the seller
-7. What if there's less than 6 products available for the item? Should we discard it for them (hide) or still show them regardless? -Possibly if there's none we won't show them I believe. Or there's a different idea for that
+3. What proves the seller is a "best seller". I there something from the eBay API we can extract this from? Or is there something like a badge there?
+4. Should this be from the same seller or different sellers? -Though this probably from different sellers due to how the selling nature of the sellers
+5. Should related products contains out-of-stock products as well? -I've seen some sites has out-of-stock as well. But some don't due to they use it to show what's the next options for the seller
+6. What if there's less than 6 products available for the item? Should we discard it for them (hide) or still show them regardless? -Possibly if there's none we won't show them I believe. Or there's a different idea for that
+7. What should happen if there's no products available for the related section? Should the section completely needed to be not rendered?
 8. Should the relevant products should've changed dynamically when the user selects different variants from the main product? -Probably not I guess since it will give more strain to the servers when the user engagement becomes high, though it seems nice to do dynamically, making relevant for some products such as different toy types/ jewelries etc.
 9. Is the user required to be logged-in, in order to see the related products? -we can reduce the server load from this. But then again user experience may needs to be sacrificed
-10. Are we gonna use AI or anything to decide the related products? i.e. By checking user's patterns of products searching, we can suggest products. -I've seen some e-commerce websites do this where they gonna suggest you based on your behavior. Like giving cheaper solutions etc.
-11. Should the sponsored (paid users for ads) be prioritized over others in here?
+10. Should the sponsored (paid users for ads) be prioritized over others in here?
 
 ### Clarifications on UI/UX
 
-12. Where should the section should be always?
-13. Where does the "See all" sections send user to?
-14. Are the 6 products should be shown in a carousel or in a fixed element (fixed grid)?
-15. What does the buttons should be there? i.e. Wishlist, Name, sub category (As the main category is same according to the details), Seller rating, product rating, price, shipping country etc.
-16. Should the sponsored ones (Paid users for the ads) have a label or badge for it?
+11. Where should the section should be always?
+12. Where does the "See all" sections send user to?
+13. Are the 6 products should be shown in a carousel or in a fixed element (Grid layout)?
+14. What does the buttons should be there? i.e. Wishlist, Name, sub category (As the main category is same according to the details), Seller rating, product rating, price, shipping country etc.
+15. Should the sponsored ones (Paid users for the ads) have a label or badge for it?
 
 ### Clarifications on Technical aspects
 
-17. Do all the browsers supports this related feature? What about the devices (Web view for devices, mobile view, tablet view)
-18. Should this sections lazy load or on-demand load with the whole page. (Coz in lazy load scenarios we should do waiting for the elements on testing)
-19. Is caching available for the related products section? If so how's the TTL?
-20. What's the acceptable page reload time for the related products section?
-21. Is there any API endpoints directly available for the testing purposes for the related products section?
-22. How does the features mentioned works with poor network conditions?
+16. Do all the browsers supports this related feature? What about the devices (Web view for devices, mobile view, tablet view)
+17. Should this sections lazy load or on-demand load with the whole page. (Coz in lazy load scenarios we should do waiting for the elements on testing)
+18. Is caching available for the related products section? If so how's the TTL?
+19. What's the acceptable page reload time for the related products section?
+20. Is there any API endpoints directly available for the testing purposes for the related products section?
+21. How does the features mentioned works with poor network conditions?
 
 ### Clarifications for the Data and Scope
 
-23. Does mentioned "same category" means uses the same exact category in eBay (Wallets - Men)? Or a broader range of available section? (eg. Fashion and accessories)
-24. Are the sponsored products should be excluded or doesn't matter?
-25. Are products with unavailable shipping addresses included in related products
+22. Does mentioned "same category" means uses the same exact category in eBay (Wallets - Men)? Or a broader range of available section? (eg. Fashion and accessories)
+23. Are the sponsored products should be excluded or doesn't matter?
+24. Are products with unavailable shipping addresses included in related products
 
 ---
 
@@ -56,18 +55,19 @@ Make sure that the Related products section (Section for the best sellers) on th
 ### In Scope
 
 - Position of the related products in the PDP (Product detail page). And also how th visibility of the element works.
-- A validator for the maximum amount of th products that should be added (maximum 6 in this case).
+- A validator for the maximum amount of the products that should be added (maximum 6 in this case).
 - Validation with the price range with the products shown in related section and with the main product.
 - Relevance of the category used to show in this section.
 - UI elements. i.e. images, titles, prices, wishlist button, "See All" section.
 - Navigation: i.e. clicking on the product, "See All" link, back navigation
 - Responsive behavior across different devices. (i.e. Desktop, Mobile, Tablet (if available))
-- Edge cases: i.e. No results, no products available, wrong/ invalid search terms used
-- Cross browser testing: i.e. Accessability across different web browsers (Chrome, Safari, Firefox, etc.).
+- Edge cases: i.e. No related products available, less than 6 products are available, section is hidden
+- Cross browser testing (compatibility): i.e. Accessability across different web browsers (Chrome, Safari, Firefox, etc.).
 
 ### Out of scope
 
 - Process of the payment and checkout flow
+- Security testing (SQL injection, XSS, input invalidation)
 - Account management of the seller's account
 - Recommendation algorithm of the eBay
 - Performance testing for the backend API (this is a separate concern)
@@ -82,7 +82,7 @@ Details are demonstrated in a table view as follows. The proposed testing strate
 | Smoke                     | Verifying the core (main) search part works -> PDP -> related products section loads                                     |
 | Functional                | Verify all acceptance criteria has been met (product count, category, price range, UI elements)                          |
 | UI/ Visual                | Verify layout is the same as designated, images, labels etc. across the elements has been loaded                         |
-| Negative                  | Invalid inputs. Empty states. Boundary conditions                                                                        |
+| Negative                  | Empty states. Boundary conditions (0 items, less than 6 items), unavailable related products                             |
 | Regression                | When PDP related functionalities or code changes, run a full suite                                                       |
 | Cross-browser             | Chrome, Firefox, Safari                                                                                                  |
 | Performance (Exploratory) | Check related products load times under throttled network. (This way can test the behavior under poor signal conditions) |
@@ -93,7 +93,7 @@ Details are demonstrated in a table view as follows. The proposed testing strate
 - **Browsers:** Chrome 120+, Firefox 120+, Safari 17+
 - **Devices:** Desktop (1280x720), Tablet (768x1024), Mobile (390x844)
 - **Network:** Standard broadband + Throttled (3G simulation)
-- **User State:** User has been logged out. USer has been logged in
+- **User State:** User has been logged out. User has been logged in
 
 ### 2.5 Entry Criteria
 
@@ -142,19 +142,13 @@ Details are demonstrated in a table view as follows. The proposed testing strate
 - Stable internet connection is available.
 - eBay homepage loads without any issues. No site errors.
 
-### 3.3 Test Dta
+### 3.3 Test Data
 
-| DataSet              | Value                             | Purpose                      |
-| -------------------- | --------------------------------- | ---------------------------- |
-| Primary search term  | `Leather wallet`                  | Standard search for wallet   |
-| Specific search term | `Men leather foldable wallet`     | Targeted product search      |
-| Special characters   | `!@#$%^&\*()`                     | Negative: input invalidation |
-| SQL injection        | `' OR 1=1: --`                    | Negative security check      |
-| Unicode              | `钱包` (Wallet in Chinese)        | Negative: encoding check     |
-| XSS Payload          | `<script>alert("xss")</script>`   | Negative: Security Check     |
-| Whitespace           | `     `                           | Negative: Edge case          |
-| Long string          | `a` x 500                         | Negative: Max length         |
-| No results term      | `yyyyynoresultsproductgggggty123` | Negative: zero results       |
+| DataSet              | Value                             | Purpose                         |
+| -------------------- | --------------------------------- | ------------------------------- |
+| Primary search term  | `Leather wallet`                  | Standard search for wallet      |
+| Specific search term | `Men leather foldable wallet`     | Targeted product search         |
+| No results term      | `yyyyynoresultsproductgggggty123` | Negative: validate empty states |
 
 ---
 
@@ -188,7 +182,7 @@ Details are demonstrated in a table view as follows. The proposed testing strate
 - **Expected:** Section labeled as "Similar items" or similar is available under the product images.
 - **Priority** P1
 
-#### TC-005 | Functional | eBay homepage loads
+#### TC-005 | Functional | Related product section has the correct title
 
 - **Preconditions:** Related products section has the relevant correct Title
 - **Steps:** 1. Check the heading for the section
@@ -202,9 +196,107 @@ Details are demonstrated in a table view as follows. The proposed testing strate
 - **Expected:** maximum of 6 products are available in the Related products section.
 - **Priority** P1
 
-#### TC-001 | Functional | eBay homepage loads
+#### TC-007 | Functional | All products in Related products have the images.
 
-- **Preconditions:**
-- **Steps:**
-- **Expected:**
-- **Priority**
+- **Preconditions:** Related products section is visible.
+- **Steps:** 1. Inspect each card for image availability.
+- **Expected:** Every Product card has it own, non-broken image.
+- **Priority** P1
+
+#### TC-008 | Functional | All products in Related products shows their prices
+
+- **Preconditions:** Related products section is visible.
+- **Steps:** 1. Inspect each product and confirm their price is visible.
+- **Expected:** Every Product card has their price tags
+- **Priority** P1
+
+#### TC-009 | Functional | All products in Related products shows display a title
+
+- **Preconditions:** Related products section is visible.
+- **Steps:** 1. Look every product and confirm their title's visibility'.
+- **Expected:** Every Product card has their own title for their product.
+- **Priority** P1
+
+#### TC-010| Functional | "See All" link is visible
+
+- **Preconditions:** Related products section is visible.
+- **Steps:** 1. Look for "See All" link in the header.
+- **Expected:** "See All" is visible. As well as clickable
+- **Priority** P1
+
+#### TC-011 | Functional | Watch-list button is available for each product in Related Products
+
+- **Preconditions:** Related products section is visible.
+- **Steps:** 1. Inspect each product and confirm they have a watch-list button.
+- **Expected:** Every Product card has a watch-list button.
+- **Priority** P1
+
+#### TC-012 | Functional | Related products are in the same category
+
+- **Preconditions:** Related products section is visible. Main product chosen in wallet
+- **Steps:** 1. Mark down the category of the main product. -> 2. Click on each product in related products.-> 3. Check their category
+- **Expected:** Every Product in related products is in the same category as the main product.
+- **Priority** P1
+
+#### TC-013 | Functional | Related products are within the price range of ±50% of the selected Main product
+
+- **Preconditions:** Related products section is visible. Main product is known. It's price tag is visible.
+- **Steps:** 1. Record main product's price. -> 2. Record price of each product in the Related products. -> 3. Calculate the percentage difference
+- **Expected:** Every Product in Related product has a ±50% difference with the Main product
+- **Priority** P1
+
+#### TC-014 | Functional | Clicking a product on the Related products opens it's own PDP
+
+- **Preconditions:** Related products section is visible.
+- **Steps:** 1. Click on the 1st product.
+- **Expected:** By clicking, it navigates into the product's own PDP. URL will change accordingly with it's unique id
+- **Priority** P1
+
+#### TC-015 | Functional | "See All" section navigates to a broader section of products
+
+- **Preconditions:** Related products section is visible.
+- **Steps:** 1. Click on the "See All" button.
+- **Expected:** By clicking, navigates the user into more related products.
+- **Priority** P2
+
+#### TC-016 | Functional | Back Navigation returns back to the Main product's PDP
+
+- **Preconditions:** User has clicked a product in related products section.
+- **Steps:** 1. Click browser's back button.
+- **Expected:** By clicking, returns to the original PDP. Page state is preserved
+- **Priority** P2
+
+#### TC-017 | Functional | Related products section is not available/ not shown when there's no items available to meet the criteria
+
+- **Preconditions:** On a product page that has no related products.
+- **Steps:** 1. Navigate into a niche product with no related items.
+- **Expected:** Related products section is not visible. Not rendered. No empty placeholder is available
+- **Priority** P2
+
+#### TC-018 | UI | Related products rendered correctly on the Mobile screen (390 x 844)
+
+- **Preconditions:** Browser set to 390 x 844 viewport
+- **Steps:** 1. Search for wallet -> 2. Open 1st product to see it's PDP 3. Count Related products
+- **Expected:** No more than 6 is shown in the related products. Related products is visible.
+- **Priority** P2
+
+#### TC-019 | UI | Related products rendered correctly on the Tablet screen (768 x 1024)
+
+- **Preconditions:** Browser set to 768 x 1024 viewport
+- **Steps:** 1. Search for wallet -> 2. Open 1st product to see it's PDP 3. Count Related products
+- **Expected:** No more than 6 is shown in the related products. Related products is visible.
+- **Priority** P2
+
+#### TC-020 | UI | Products images in the Related products is not broken. No alts/missing icon showing
+
+- **Preconditions:** Related products section is visible.
+- **Steps:** 1. Open PDP -> 2. Scroll to related Products -> 3. Inspect images
+- **Expected:** No broken image icons. No Alt text has been displayed.
+- **Priority** P1
+
+#### TC-021 | UI | Related products section does not overlap with others page elements.
+
+- **Preconditions:** Related products section is visible.
+- **Steps:** 1. Open PDP -> 2. Scroll to related products.
+- **Expected:** Related products section is properly contained. No z index issues or layout overflows are present.
+- **Priority** P2
