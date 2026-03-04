@@ -189,7 +189,7 @@ Details are demonstrated in a table view as follows. The proposed testing strate
 - **Expected:** Something like "Similar sponsored items", "Similar items" or "Similar items Sponsored" or an equivalent is available.
 - **Priority** P1
 
-#### TC-006 | Functional | maximum amount of 6 products are available
+#### TC-006 | Functional | Maximum amount of 6 products are available
 
 - **Preconditions:** Related products section is available/visible.
 - **Steps:** 1. Count all the product cards in related products section
@@ -259,44 +259,49 @@ Details are demonstrated in a table view as follows. The proposed testing strate
 - **Expected:** By clicking, navigates the user into more related products.
 - **Priority** P2
 
-#### TC-016 | Functional | Back Navigation returns back to the Main product's PDP
+>Removing the following test case as I originally thought clicking the product would open in same window. But it actually opens in a new tab. So this is not something valuable to test. Coz closing newly opened tab and the data on previous tab is still there is just basic browser behavior. Not something related to the business logic
+
+<s>#### TC-016 | Functional | Back Navigation returns back to the Main product's PDP
 
 - **Preconditions:** User has clicked a product in related products section.
 - **Steps:** 1. Click browser's back button.
 - **Expected:** By clicking, returns to the original PDP. Page state is preserved
-- **Priority** P2
+- **Priority** P2</s>
 
-#### TC-017 | Functional | Related products section is not available/ not shown when there's no items available to meet the criteria
+#### TC-016 | Functional | Related products section is not available/ not shown when there's no items available to meet the criteria
 
 - **Preconditions:** On a product page that has no related products.
 - **Steps:** 1. Navigate into a niche product with no related items.
 - **Expected:** Related products section is not visible. Not rendered. No empty placeholder is available
 - **Priority** P2
 
-#### TC-018 | UI | Related products rendered correctly on the Mobile screen (390 x 844)
+#### TC-017 | UI | Related products rendered correctly on the Mobile screen (390 x 844)
 
 - **Preconditions:** Browser set to 390 x 844 viewport
 - **Steps:** 1. Search for wallet -> 2. Open 1st product to see it's PDP 3. Count Related products
 - **Expected:** No more than 6 is shown in the related products. Related products is visible.
 - **Priority** P2
 
-#### TC-019 | UI | Related products rendered correctly on the Tablet screen (768 x 1024)
+#### TC-018 | UI | Related products rendered correctly on the Tablet screen (768 x 1024)
 
 - **Preconditions:** Browser set to 768 x 1024 viewport
 - **Steps:** 1. Search for wallet -> 2. Open 1st product to see it's PDP 3. Count Related products
 - **Expected:** No more than 6 is shown in the related products. Related products is visible.
 - **Priority** P2
 
-#### TC-020 | UI | Products images in the Related products is not broken. No alts/missing icon showing
+#### TC-019 | UI | Products images in the Related products is not broken. No alts/missing icon showing
 
 - **Preconditions:** Related products section is visible.
 - **Steps:** 1. Open PDP -> 2. Scroll to related Products -> 3. Inspect images
 - **Expected:** No broken image icons. No Alt text has been displayed.
 - **Priority** P1
 
-#### TC-021 | UI | Related products section does not overlap with others page elements.
+#### TC-020 | UI | Related products section does not overlap with others page elements.
 
 - **Preconditions:** Related products section is visible.
 - **Steps:** 1. Open PDP -> 2. Scroll to related products.
 - **Expected:** Related products section is properly contained. No z index issues or layout overflows are present.
 - **Priority** P2
+
+
+For bugs we can write that we failed on bot detection!

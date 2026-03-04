@@ -7,6 +7,7 @@ export const SearchTerms = {
     walletExact: "Men leather foldable wallet",
   },
   edge: {
+    noItems:"yyyyynoresultsproductgggggty123",
     specialChars: "!@#$%^&*()",
     sqlInjection: "' OR 1=1: --",
     xss: '<script>alert("xss")</script>',
@@ -22,7 +23,7 @@ export const priceRange = {
 };
 
 export const RelatedProducts = {
-  maxCount: 6,
+  maxCount: 4,
   minCount: 1,
 };
 
