@@ -259,7 +259,7 @@ Details are demonstrated in a table view as follows. The proposed testing strate
 - **Expected:** By clicking, navigates the user into more related products.
 - **Priority** P2
 
->Removing the following test case as I originally thought clicking the product would open in same window. But it actually opens in a new tab. So this is not something valuable to test. Coz closing newly opened tab and the data on previous tab is still there is just basic browser behavior. Not something related to the business logic
+> Removing the following test case as I originally thought clicking the product would open in same window. But it actually opens in a new tab. So this is not something valuable to test. Coz closing newly opened tab and the data on previous tab is still there is just basic browser behavior. Not something related to the business logic
 
 <s>#### TC-016 | Functional | Back Navigation returns back to the Main product's PDP
 
@@ -274,7 +274,6 @@ Details are demonstrated in a table view as follows. The proposed testing strate
 - **Steps:** 1. Navigate into a niche product with no related items.
 - **Expected:** Related products section is not visible. Not rendered. No empty placeholder is available
 - **Priority** P2
-
 
 #### TC-017 | UI | Products images in the Related products is not broken. No alts/missing icon showing
 
@@ -304,4 +303,134 @@ Details are demonstrated in a table view as follows. The proposed testing strate
 - **Expected:** No more than 6 is shown in the related products. Related products is visible.
 - **Priority** P2
 
-For bugs we can write that we failed on bot detection!
+## SECTION 04: Bug Reports
+
+---
+
+### BUG-001 | HIGH | Related products shows 7 instead of 6
+
+**Summary:** Related products in the sections has 7 products for the wallet instead of 6 products cards defined as the maximum
+
+**Environment:** Chrome 120 / Desktop / Windows 11 / https://www.ebay.com/
+
+**Preconditions:** Search for "Leather wallet". CLick the first result. Scroll to the related products section
+
+**Steps to reproduce:**
+
+1. Navigate to https://www.ebay.com/
+2. Search for "Leather wallet"
+3. Click on th first product from the results.
+4. Scroll to the "Similar items" section.
+5. Count the number of products displayed in the section
+
+**Expected results:** A maximum of 6 products in the section
+
+**Actual results:** 7 products cards are present in the section
+
+**Severity:** High
+
+**Priority:** P1
+
+**Attachments:** screenshot_bug001.png
+
+### BUG-002 | MEDIUM | Product title text overflows outside the card layout in the related products section
+
+**Summary:** Related products cards which have long data in it overflows the card's boundary. Thus breaking the layout and overlapping other elements
+
+**Environment:** Chrome 120 / Desktop / Windows 11 / https://www.ebay.com/
+
+**Preconditions:** Search for "Leather wallet". CLick the first result. Scroll to the related products section where at least one of them has a long product title
+
+**Steps to reproduce:**
+
+1. Navigate to https://www.ebay.com/
+2. Search for "Leather wallet"
+3. Click on th first product from the results.
+4. Scroll to the "Similar items" section.
+5. See that a card has lengthy product title in it
+
+**Expected results:** Product data are truncated. Wrapped neatly within the card's boundaries. Has no overflow
+
+**Actual results:** Product titles that has a long name is overflowed outside the container. Overlapping the other page elements as well
+
+**Severity:** Medium
+
+**Priority:** P2
+
+**Attachments:** screenshot_bug002.png
+
+### BUG-003 | MEDIUM | Related product price is 3x higher than the main product price
+
+**Summary:** One of the related product shows a price that has over 300% increment compared to the base product in the PDP. Which is far outside the range designated
+
+**Environment:** Chrome 120 / Desktop / Windows 11 / https://www.ebay.com/
+
+**Preconditions:** Navigated on the PDP having an item priced at 40 USDs.
+
+**Steps to reproduce:**
+
+1. Navigate to https://www.ebay.com/
+2. Search for "Leather wallet"
+3. Click on th first product from the results.
+4. Scroll to the "Similar items" section.
+5. Check the prices in the cards
+
+**Expected result:s** All related product are withing the ±50% of the main product
+
+**Actual results:** 4th card has a value of 1280 USD. Which is higher than 320% of the main product
+
+**Priority:** Medium
+
+**Severity:** P2
+
+**Attachments:** screenshot_bug003.png
+
+### BUG-004 | MEDIUM | Broken images displayed in items in related products section
+
+**Summary:** The 3rd card for the similar items has it's image broken
+
+**Environment:** Chrome 120 / Desktop / Windows 11 / https://www.ebay.com/
+
+**Preconditions:** User is on a wallet product page and related products section is visible
+
+**Steps to reproduce:** 
+1. Navigate to https://www.ebay.com/
+2. Search for "Leather wallet"
+3. Click on th first product from the results.
+4. Scroll to the "Similar items" section.
+5. Check the images in each card
+
+**Expected results:** All Products card displays an image
+
+**Actual results:** 3rd card has no product card and shows as missing
+
+**Priority** Medium
+
+**Severity:** P2
+
+**Attachments:** screenshot_bug004.png
+
+### BUG-005 | LOW | "See all" link in related products section is not keyboard accessible  
+
+**Summary:** "See all" section in the related product cannot be triggered or clicked via the keyboard actions (Tab or Enter). This makes it fails the basic accessibilty requirements
+
+**Environment:** Firefox 110 / Desktop / Linux / https://www.ebay.com/
+
+**Preconditions:** User has navigated to the PDP using keyboard only (No mouse has been used)
+
+**Steps to reproduce:**
+1. Navigate to https://www.ebay.com/
+2. Search for "Leather wallet"
+3. Click on th first product from the results.
+4. Use the Tab key to navigate through page elements.
+5. Attempt to reach "See All" link in the related products section
+
+**Expected results:** Can focus through by cycling through Tb key to the "See All" section in related products section. Focus indicator is visible
+
+**Actual results:** "See All" is skipped whe trying to cycle through Tab key
+
+**Priority:** Low
+
+**Severity:** P3
+
+**Attachments:** screenshot_bug005.png

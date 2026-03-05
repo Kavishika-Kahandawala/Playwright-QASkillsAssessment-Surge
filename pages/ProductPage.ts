@@ -65,7 +65,7 @@ export class ProductPage {
       .locator('[data-testid="x-price-primary"]')
       .first()
       .filter({ hasText: /\d/ });
-      // .filter({ hasText: /\$/ });
+    // .filter({ hasText: /\$/ });
   }
 
   async waitForPageLoad() {
@@ -81,7 +81,7 @@ export class ProductPage {
       async () =>
         await new Promise<void>((resolve) => {
           let currentPosition = 0;
-          const step = document.body.scrollHeight ** 0.8;
+          const step = document.body.scrollHeight ** 0.7;
           const delay = 150;
 
           const timer = setInterval(() => {
@@ -93,6 +93,12 @@ export class ProductPage {
             }
           }, delay);
         }),
+    );
+    await this.page.waitForTimeout(1500);
+  }
+  async scrollByPointOne() {
+    await this.page.evaluate(() =>
+      window.scrollTo(0, document.body.scrollHeight * 0.1),
     );
     await this.page.waitForTimeout(1500);
   }

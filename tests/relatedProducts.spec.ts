@@ -238,7 +238,7 @@ test.describe("eBay related products feature", () => {
         ).toBeGreaterThan(0);
 
         const alt = await image.getAttribute("alt");
-        // we do a if 1st coz there might be instances which has no alts
+        // we do a "if" 1st coz there might be instances which has no alts
         if (alt) {
           expect(alt.toLowerCase()).not.toMatch(
             /missing|broken|error|not found|unavailable/,
@@ -312,8 +312,9 @@ test.describe("Responsiveness behavior testing cases", () => {
 
       const newPage = await searchPage.clickFirstResult();
       const productPage = new ProductPage(newPage);
-      // scroll because of the lazy load
-      await productPage.scrollToBottom();
+      // scroll because of the lazy load.
+      // We do not scroll all as it sometimes stuck in infinite loops for tablet view
+      await productPage.scrollByPointOne()
       await productPage.scrollToRelatedProducts();
 
       const isVisible = await productPage.isRelatedProductsSectionVisible();
