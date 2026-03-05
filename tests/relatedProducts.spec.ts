@@ -201,6 +201,11 @@ test.describe("eBay related products feature", () => {
 
       await expect(newPage.locator("body")).toBeVisible();
       expect(pageErrors.length).toBe(0);
+
+      //eBay always suggests something. So we can't text no results.
+      // Instead we will check if it says no results has been found text is visible.Which is kind of a valid reasoning
+    const bodyText = await newPage.locator("body").innerText()
+    expect(bodyText).toMatch(/no exact match|didn't find|no results/i)
     });
 
     test("@Regression TC-017 -  Products images in the Related products is not broken. No alts/missing icon showing", async () => {
