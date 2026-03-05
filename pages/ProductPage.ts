@@ -13,57 +13,88 @@ export class ProductPage {
   readonly relatedProductsImages: Locator;
   readonly seeAllLink: Locator;
   readonly watchlistButton: Locator;
-  readonly categoryTitle: Locator;
+  // readonly categoryTitle: Locator;
 
   constructor(page: Page) {
     this.page = page;
-    this.productCategory = page.locator("").first();
+    this.productCategory = page.locator("a.seo-breadcrumb-text").first();
     // this.relatedProductsSection = page.locator("h2.busU").first();
     this.relatedProductsHeading = page
       .locator(
-        'h2:has-text("Similar items"), h2:has-text("Similar sponsored items"), h2:has-text("Related items")',
+        'h2:has-text("Similar items"), h2:has-text("Similar sponsored items"), h2:has-text("Related items"), h2:has-text("Compare with similar items"), h2:has-text("Customers also considered")',
       )
       .first();
 
     this.relatedProductsSection = page
       .locator(
-        'div:has(h2:has-text("Similar items")), div:has(h2:has-text("Similar sponsored items"))',
+        'div:has(h2:has-text("Similar items")), div:has(h2:has-text("Similar sponsored items")), div:has(h2:has-text("Compare with similar items")), div:has(h2:has-text("Customers also considered"))',
       )
       .first();
 
     this.relatedProductsItems = page.locator(
-      'div:has(h2:has-text("Similar items")) section,' +
-        ' div:has(h2:has-text("Similar sponsored items")) section',
+      'div:has(h2:has-text("Similar items")) a[aria-label][href*="/itm/"],' +
+        'div:has(h2:has-text("Compare with similar items"))  a[aria-label][href*="/itm/"],' +
+        'div:has(h2:has-text("Customers also considered")) a[aria-label][href*="/itm/"]',
     );
 
     this.relatedProductsTitles = page.locator(
-      'div:has(h2:has-text("Similar items")) h3,' +
-        ' div:has(h2:has-text("Similar sponsored items")) h3',
+      'div:has(h2:has-text("Similar items")) section[data-viewport] h3',
     );
 
     this.relatedProductsPrices = page
-      .locator('div:has(h2:has-text("Similar items")) span[role="text"],')
-      .filter({ hasText: /\$[d,]+/ });
+      .locator(
+        'div:has(h2:has-text("Similar items")) section[data-viewport] span[role="text"]',
+      )
+      .filter({ hasText: /^\$/ });
 
     this.relatedProductsImages = page.locator(
-      'div:has(h2:has-text("Similar items")) img[src*=ebayimg.com],' +
-        ' div:has(h2:has-text("Similar sponsored items")) img[src*=ebayimg.com]',
+      "div.recs-image-wrap-below-hero img",
     );
 
     this.seeAllLink = page
-      .locator("a.recs-see-all-link-align-with-subtitle")
+      .locator(
+        "a.recs-see-all-link-align-with-subtitle, a.recs-see-all-link-mweb-align-with-subtitle",
+      )
       .first();
 
     this.watchlistButton = page.locator(
       'button[aria-label*="to your watch list"]',
     );
 
-    this.categoryTitle = page.locator("");
-    this.productPrice = page.locator("");
+    this.productPrice = page
+      .locator('[data-testid="x-price-primary"]')
+      .first()
+      .filter({ hasText: /\d/ });
+      // .filter({ hasText: /\$/ });
   }
 
   async waitForPageLoad() {
     await this.page.waitForLoadState("domcontentloaded");
+  }
+
+  // async scrollToBottom(){
+  //   await this.page.evaluate(() =>window.scrollTo(0, document.body.scrollHeight * 0.1))
+  //   await this.page.waitForTimeout(1500)
+  // }
+  async scrollToBottom() {
+    await this.page.evaluate(
+      async () =>
+        await new Promise<void>((resolve) => {
+          let currentPosition = 0;
+          const step = document.body.scrollHeight ** 0.8;
+          const delay = 150;
+
+          const timer = setInterval(() => {
+            currentPosition += step;
+            window.scrollTo(0, currentPosition);
+            if (currentPosition >= document.body.scrollHeight) {
+              clearInterval(timer);
+              resolve();
+            }
+          }, delay);
+        }),
+    );
+    await this.page.waitForTimeout(1500);
   }
 
   async scrollToRelatedProducts() {
@@ -115,7 +146,6 @@ export class ProductPage {
   }
 
   async isWatchlistButtonsVisible(): Promise<boolean> {
-    await this.watchlistButton.waitFor({ state: "visible", timeout: 5000 });
     const count = await this.watchlistButton.count();
     return count > 0;
   }
@@ -143,9 +173,14 @@ export class ProductPage {
     return prices;
   }
 
-  async clickSeeAll() {
-    await this.seeAllLink.click();
-    await this.page.waitForEvent("domcontentloaded");
+  async clickSeeAll(): Promise<Page> {
+    const [newPage] = await Promise.all([
+      this.page.context().waitForEvent("page"),
+
+      await this.seeAllLink.click(),
+    ]);
+    await newPage.waitForEvent("domcontentloaded");
+    return newPage;
   }
 
   async isRelatedProductsSectionVisible(): Promise<boolean> {
@@ -159,5 +194,20 @@ export class ProductPage {
     } catch {
       return false;
     }
+  }
+
+  async getCategory(): Promise<string> {
+    const lastBreadcrumb = this.productCategory.last();
+    const text = await lastBreadcrumb.textContent();
+    return (text || "").trim();
+  }
+
+  async clickRelatedProducts(index: number = 0) {
+    const [newPage] = await Promise.all([
+      this.page.context().waitForEvent("page"),
+      this.relatedProductsItems.nth(index).click(),
+    ]);
+    await newPage.waitForLoadState("domcontentloaded");
+    return newPage;
   }
 }

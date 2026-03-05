@@ -19,7 +19,7 @@ export const SearchTerms = {
 };
 
 export const priceRange = {
-  tolerancePercent: 50,
+  tolerancePercent: 300,
 };
 
 export const RelatedProducts = {

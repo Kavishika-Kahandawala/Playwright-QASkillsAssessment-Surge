@@ -275,33 +275,33 @@ Details are demonstrated in a table view as follows. The proposed testing strate
 - **Expected:** Related products section is not visible. Not rendered. No empty placeholder is available
 - **Priority** P2
 
-#### TC-017 | UI | Related products rendered correctly on the Mobile screen (390 x 844)
 
-- **Preconditions:** Browser set to 390 x 844 viewport
-- **Steps:** 1. Search for wallet -> 2. Open 1st product to see it's PDP 3. Count Related products
-- **Expected:** No more than 6 is shown in the related products. Related products is visible.
-- **Priority** P2
-
-#### TC-018 | UI | Related products rendered correctly on the Tablet screen (768 x 1024)
-
-- **Preconditions:** Browser set to 768 x 1024 viewport
-- **Steps:** 1. Search for wallet -> 2. Open 1st product to see it's PDP 3. Count Related products
-- **Expected:** No more than 6 is shown in the related products. Related products is visible.
-- **Priority** P2
-
-#### TC-019 | UI | Products images in the Related products is not broken. No alts/missing icon showing
+#### TC-017 | UI | Products images in the Related products is not broken. No alts/missing icon showing
 
 - **Preconditions:** Related products section is visible.
 - **Steps:** 1. Open PDP -> 2. Scroll to related Products -> 3. Inspect images
 - **Expected:** No broken image icons. No Alt text has been displayed.
 - **Priority** P1
 
-#### TC-020 | UI | Related products section does not overlap with others page elements.
+#### TC-018 | UI | Related products section does not overlap with others page elements.
 
 - **Preconditions:** Related products section is visible.
 - **Steps:** 1. Open PDP -> 2. Scroll to related products.
 - **Expected:** Related products section is properly contained. No z index issues or layout overflows are present.
 - **Priority** P2
 
+#### TC-019 | UI | Related products rendered correctly on the Mobile screen (Emulation for iPhone 12)
+
+- **Preconditions:** Browser set to iPhone 12 viewport
+- **Steps:** 1. Search for wallet -> 2. Open 1st product to see it's PDP 3. Count Related products
+- **Expected:** No more than 6 is shown in the related products. Related products is visible.
+- **Priority** P2
+
+#### TC-020 | UI | Related products rendered correctly on the Tablet screen (Emulation for iPad Pro 11)
+
+- **Preconditions:** Browser set to iPad Pro 11 viewport
+- **Steps:** 1. Search for wallet -> 2. Open 1st product to see it's PDP 3. Count Related products
+- **Expected:** No more than 6 is shown in the related products. Related products is visible.
+- **Priority** P2
 
 For bugs we can write that we failed on bot detection!
