@@ -305,7 +305,9 @@ Details are demonstrated in a table view as follows. The proposed testing strate
 - **Steps:** 1. Search for wallet -> 2. Open 1st product to see it's PDP 3. Count Related products
 - **Expected:** No more than 6 is shown in the related products. Related products is visible.
 - **Priority** P2
-> - **Note:** As mobile site uses heavily lazy loading to save data, we scroll through the webpage first when they loads to trigger Similar products section. Depending on the internet if the speed is too fast, it can be changed in ProductPage.scrollToBottom() to 0.5 or something. Currently works on 0.7. Though we can do a 0.1 view Height scroll, I just do ths for extra clarity and the test cases are much more versatile for DOM changes :)
+> - **Note:** As mobile site uses heavily lazy loading to save data, we scroll through the webpage first when they loads to trigger Similar products section. Depending on the internet if the speed is too fast, it can be changed in ProductPage.scrollToBottom() to 0.5 or something. Currently works on 0.75. Though we can do a 0.1 view Height scroll, I just do ths for extra clarity and the test cases are much more versatile for DOM changes :)
+
+> Notes from future: In the last tests I've found that this also stuck in infinite loops sometimes. So for the safe side I did a 0.3 scroll from the view height for the sake of the assessment TT
 
 > Also related products section is different in mobile vew. So separate name viewed were used
 

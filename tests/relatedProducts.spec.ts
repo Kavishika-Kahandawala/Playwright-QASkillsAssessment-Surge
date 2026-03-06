@@ -294,7 +294,7 @@ test.describe("Responsiveness behavior testing cases", () => {
       const newPage = await searchPage.clickFirstResultMobile();
       const productPage = new ProductPage(newPage);
       // scroll because of the lazy load
-      await productPage.scrollToBottom();
+      await productPage.scrollByPointThree();
       await productPage.scrollToRelatedProducts();
 
       const isVisible = await productPage.isRelatedProductsSectionVisible();

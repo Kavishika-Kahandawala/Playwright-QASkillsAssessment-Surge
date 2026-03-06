@@ -81,7 +81,7 @@ export class ProductPage {
       async () =>
         await new Promise<void>((resolve) => {
           let currentPosition = 0;
-          const step = document.body.scrollHeight ** 0.7;
+          const step = document.body.scrollHeight ** 0.75;
           const delay = 150;
 
           const timer = setInterval(() => {
@@ -99,6 +99,12 @@ export class ProductPage {
   async scrollByPointOne() {
     await this.page.evaluate(() =>
       window.scrollTo(0, document.body.scrollHeight * 0.1),
+    );
+    await this.page.waitForTimeout(1500);
+  }
+  async scrollByPointThree() {
+    await this.page.evaluate(() =>
+      window.scrollTo(0, document.body.scrollHeight * 0.3),
     );
     await this.page.waitForTimeout(1500);
   }
