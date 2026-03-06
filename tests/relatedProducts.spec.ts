@@ -202,7 +202,7 @@ test.describe("eBay related products feature", () => {
       await expect(newPage.locator("body")).toBeVisible();
       expect(pageErrors.length).toBe(0);
 
-      //eBay always suggests something. So we can't text no results.
+      //eBay always suggests something. So we can't test no results.
       // Instead we will check if it says no results has been found text is visible.Which is kind of a valid reasoning
     const bodyText = await newPage.locator("body").innerText()
     expect(bodyText).toMatch(/no exact match|didn't find|no results/i)
@@ -212,6 +212,7 @@ test.describe("eBay related products feature", () => {
       const images = productPage.relatedProductsImages;
       const count = await images.count();
 
+      // to test, at least one image should present. We check it first
       expect(
         count,
         "No images has been found in the related products section",
@@ -220,8 +221,11 @@ test.describe("eBay related products feature", () => {
       for (let i = 0; i < count; i++) {
         const image = images.nth(i);
 
+        // mage should be visible in the webpage
         await expect(image, `Image No. ${i + 1} is not visible`).toBeVisible();
 
+        // src should check if it points to something. Otherwise the browser will show a broken image mark
+        // also we validating if the url is from ebayimg, just to be precise 
         const src = await image.getAttribute("src");
         expect(src, `Image No. ${i + 1} has no src attributes`).toBeTruthy();
         expect(
@@ -232,6 +236,8 @@ test.describe("eBay related products feature", () => {
         const naturalWidth = await image.evaluate(
           (img: HTMLImageElement) => img.naturalWidth,
         );
+
+        // If natural width is 0, means browser tried to load the image. But it was not present.
         expect(
           naturalWidth,
           `Image No. ${i + 1} failed to load (naturalWidth is 0). Means broken icons might be showing already`,
@@ -255,7 +261,7 @@ test.describe("eBay related products feature", () => {
         "Could not get bounding box for the related products section unfortunately",
       ).not.toBeNull();
 
-      // section should have real dimensions. Having zro width/height means it's collapsed
+      // section should have real dimensions. Having zero width/height means it's collapsed
       expect(
         sectionBox!.width,
         "Related product section has a zero width",
