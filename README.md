@@ -262,7 +262,7 @@ Details are demonstrated in a table view as follows. The proposed testing strate
 - **Preconditions:** Related products section is visible.
 - **Steps:** 1. Click on the "See All" button.
 - **Expected:** By clicking, navigates the user into more related products.
-- **Priority** P2
+- **Priority:** P2
 
 > Removing the following test case as I originally thought clicking the product would open in same window. But it actually opens in a new tab. So this is not something valuable to test. Coz closing newly opened tab and the data on previous tab is still there is just basic browser behavior. Not something related to the business logic
 
@@ -271,14 +271,14 @@ Details are demonstrated in a table view as follows. The proposed testing strate
 - **Preconditions:** User has clicked a product in related products section.
 - **Steps:** 1. Click browser's back button.
 - **Expected:** By clicking, returns to the original PDP. Page state is preserved
-- **Priority** P2</s>
+- **Priority:** P2</s>
 
 #### TC-016 | Functional | Related products section is not available/ not shown when there's no items available to meet the criteria
 
 - **Preconditions:** On a product page that has no related products.
 - **Steps:** 1. Navigate into a niche product with no related items.
 - **Expected:** Related products section is not visible. Not rendered. No empty placeholder is available
-- **Priority** P2
+- **Priority:** P2
 > - **Note:** how eBay works is it always suggests something even if there's no match. Ebay never gives a truly empty page. So we can't test a webpage without no products. Instead we will check if it has the "No results has been found" text is visible. Which is kind of a valid reasoning
 
 #### TC-017 | UI | Products images in the Related products is not broken. No alts/missing icon showing
@@ -286,7 +286,7 @@ Details are demonstrated in a table view as follows. The proposed testing strate
 - **Preconditions:** Related products section is visible.
 - **Steps:** 1. Open PDP -> 2. Scroll to related Products -> 3. Inspect images
 - **Expected:** No broken image icons. No Alt text has been displayed.
-- **Priority** P1
+- **Priority:** P1
 > - **Note:** Various tests are used here. First checks if images are visible to begin with. Then if they should be iin webpage. Then if Natural width is more than 0. Means if it's broken it will be 0 (Browser tried to load the image but it was not present). And we do a "alt" check as well just to be nice :)
 
 #### TC-018 | UI | Related products section does not overlap with others page elements.
@@ -294,7 +294,7 @@ Details are demonstrated in a table view as follows. The proposed testing strate
 - **Preconditions:** Related products section is visible.
 - **Steps:** 1. Open PDP -> 2. Scroll to related products.
 - **Expected:** Related products section is properly contained. No z index issues or layout overflows are present.
-- **Priority** P2
+- **Priority:** P2
 - **Note:** Section should have real dimensions. Having zero width/height means it's collapsed
 
 > Note: Mobile and Tablet tests are done under separately as their functions differs (For an example, mobile version opens a product in the same tab, meanwhile others use a new tab). Also for this, 'real emulated devices' are used rather than changing viewport. This was, so we can test how it works when we really use in mobile or tablets. Coz sites like eBay use different layouts as well. And mobile and tablets have more lazy loading to save data. So we have to scroll them too. Also some element ids and css are different in mobile as they use separate layouts kinda. So I've made separate functions to them
@@ -304,10 +304,10 @@ Details are demonstrated in a table view as follows. The proposed testing strate
 - **Preconditions:** Browser set to iPhone 12 emulation. 
 - **Steps:** 1. Search for wallet -> 2. Open 1st product to see it's PDP 3. Count Related products
 - **Expected:** No more than 6 is shown in the related products. Related products is visible.
-- **Priority** P2
+- **Priority:** P2
 > - **Note:** As mobile site uses heavily lazy loading to save data, we scroll through the webpage first when they loads to trigger Similar products section. Depending on the internet if the speed is too fast, it can be changed in ProductPage.scrollToBottom() to 0.5 or something. Currently works on 0.75. Though we can do a 0.1 view Height scroll, I just do ths for extra clarity and the test cases are much more versatile for DOM changes :)
 
-> Notes from future: In the last tests I've found that this also stuck in infinite loops sometimes. So for the safe side I did a 0.3 scroll from the view height for the sake of the assessment TT
+> Notes from future: In the last tests I've found that this also stuck in infinite loops sometimes. So for the safe side I did a 0.3 scroll from the view height for the sake of the assessment 😭
 
 > Also related products section is different in mobile vew. So separate name viewed were used
 
@@ -316,12 +316,14 @@ Details are demonstrated in a table view as follows. The proposed testing strate
 - **Preconditions:** Browser set to iPad Pro 11 emulation
 - **Steps:** 1. Search for wallet -> 2. Open 1st product to see it's PDP 3. Count Related products
 - **Expected:** No more than 6 is shown in the related products. Related products is visible.
-- **Priority** P2
+- **Priority:** P2
 > **Note:** Unlike scrolling to bottom like in mobile view, in some cases I've noticed tablet view get stuck in infinite scrolling. This is as the last section keeps growing on scroll as it triggers. So for the safe side I've used 0.1 scroll from view height to trigger the lazy loading for the related products section
 
 ## SECTION 04: Bug Reports
 
 ---
+
+> As these are assumptions based bug reports, attachments acts like placeholders :)
 
 ### BUG-001 | HIGH | Related products shows 7 instead of 6
 
