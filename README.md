@@ -2,7 +2,7 @@
 
 ---
 
-## SECTION 01: Needed Questions and Clarifications
+## SECTION 01: NH2192eeded Questions and Clarifications
 
 Before creating the test cases, followings should be communicated with the relevant teams and get the answers from them.
 
