@@ -1,5 +1,8 @@
 # eBay products Manual QA Testing
 
+>IMPORTANT: Please use pnpm as your packaging manager for these please 🥹 Run pnpm rather than npm
+
+> Github Url for the repo is at: https://github.com/Kavishika-Kahandawala/Playwright-QASkillsAssessment-Surge
 ---
 
 ## SECTION 01: Needed Questions and Clarifications
