@@ -5,6 +5,38 @@
 > Github Url for the repo is at: https://github.com/Kavishika-Kahandawala/Playwright-QASkillsAssessment-Surge
 ---
 
+## Tech Stack
+- Playwright
+- TypeScript
+- Page Object Model
+- Package Manager: pnpm
+
+## Setup Instructions
+
+Install dependencies:
+
+```
+pnpm install
+```
+
+Install Playwright browsers:
+
+```
+pnpm exec playwright install
+```
+
+### Run Tests
+
+```
+pnpm exec playwright test
+```
+
+### Open HTML Report
+
+```
+pnpm exec playwright show-report
+```
+
 ## SECTION 01: Needed Questions and Clarifications
 
 Before creating the test cases, followings should be communicated with the relevant teams and get the answers from them.
